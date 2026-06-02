@@ -61,36 +61,6 @@ Supported dimensionality reduction methods:
 
 ---
 
-# Repository Structure
-
-```text
-DRIP/
-│
-├── README.md
-├── requirements.txt
-├── LICENSE
-│
-├── dimensionality_reduction/
-│   ├── PCA/
-│   └── autoencoder/
-│
-├── phenotype_processing/
-│
-├── prediction_models/
-│   ├── logistic_regression/
-│   └── linear_regression/
-│
-├── covariate_processing/
-│
-├── scripts/
-│
-├── notebooks/
-│
-└── figures/
-```
-
----
-
 # Main Components
 
 ## PCA Dimensionality Reduction
@@ -172,7 +142,7 @@ Application ID used in this study: 26664.
 
 Pretrained chromosome-specific PCA transformers used in the manuscript are available at:
 
-[Google Drive / Zenodo link]
+https://drive.google.com/drive/folders/1oukhU_B4nM5kH9z2BxC81Kfn4kp05JAm?usp=drive_link
 
 Example structure:
 
@@ -225,6 +195,7 @@ tensorflow
 # Example Pipeline
 
 ## Step 1 — Train PCA transformers
+(In the case of using exactly our SNPs and population filters, you can skip this step and download the PCA provided by us : .  https://drive.google.com/drive/folders/1oukhU_B4nM5kH9z2BxC81Kfn4kp05JAm?usp=drive_link )
 
 ```bash
 python PCA_train.py <chromosome> <rep>
