@@ -195,7 +195,9 @@ tensorflow
 # Example Pipeline
 
 ## Step 1 — Train PCA transformers
-(In the case of using exactly our SNPs and population filters, you can skip this step and download the PCA provided by us : .  https://drive.google.com/drive/folders/1oukhU_B4nM5kH9z2BxC81Kfn4kp05JAm?usp=drive_link )
+In the case of using exactly our SNPs and population filters, you can skip this step and download the PCA provided by us :  https://drive.google.com/drive/folders/1oukhU_B4nM5kH9z2BxC81Kfn4kp05JAm?usp=drive_link
+
+In cases of working with other filters, you will need to run the following code once (for all phenotypes you want to predict together):
 
 ```bash
 python PCA_train.py <chromosome> <rep>
