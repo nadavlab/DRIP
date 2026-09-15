@@ -13,7 +13,7 @@ def LinearRegression_incremental(x_train_chunks_file, y_train_chunks_file, X_val
     val_loss = []     # to store validation loss for each epoch
 
     # Initialize the SGDRegressor
-    model=SGDRegressor(loss='squared_error', learning_rate='constant', eta0=1e-5, penalty='l2', random_state=42)
+    model=SGDRegressor(loss='squared_error', learning_rate='optimal', eta0=1e-5, penalty='l2', random_state=42)
     is_initialized = False  # Flag to check if model has been initialized with partial_fit
 
     batch_train_loss = []
