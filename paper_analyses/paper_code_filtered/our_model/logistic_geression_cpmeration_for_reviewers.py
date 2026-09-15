@@ -189,7 +189,7 @@ def load_first_validation_chunk(X_train_file, y_train_file, feature_config):
 def train_incremental(X_train_file, y_train_file, X_val, y_val, feature_cols, out_dir):
     model = SGDClassifier(
         loss="log_loss",
-        learning_rate="constant",
+        learning_rate="optimal",
         eta0=ETA0,
         penalty="l2",
         random_state=42
