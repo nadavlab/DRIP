@@ -14,7 +14,7 @@ def LogisticRegression_incremental(x_train_chunks_file, y_train_chunks_file, X_v
 
     # initialize the SGDClassifier with logistic loss (i.e. logistic regression)
     if model==None:
-        model = SGDClassifier(loss='log_loss', learning_rate='constant', eta0=1e-5, penalty='l2', random_state=42)
+        model = SGDClassifier(loss='log_loss', learning_rate='optimal', eta0=1e-5, penalty='l2', random_state=42)
 
 
     # flag to check if model has been initialized with classes via partial_fit
@@ -307,7 +307,6 @@ metrics.update(
      'average_precision_score': average_precision_score(y_test, predictions),'time':(time.time() - start_time)/60})
 
 # Append metrics to CSV
-#metrics_file = os.path.join("/sise/nadav-group/nadavrap-group/hadasa/my_storage/impoving_PRS/data/our_model/PCA/logistic_regression/metrics_log_genetic_only.csv")
 metrics_file = os.path.join("/sise/nadav-group/nadavrap-group/hadasa/my_storage/impoving_PRS/data/our_model/PCA/logistic_regression/eta0_0.01_l2_lr_optimal_1500_metrics_log.csv")
 
 metrics_df = pd.DataFrame([metrics])
