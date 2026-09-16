@@ -38,7 +38,7 @@ UKB_PC_PATTERN = r"^22009-0\.\d+$"
 # Examples: PC1, PC2... or PCA_1... or 0,1,2...
 OUR_PC_PATTERN = r"^(PC|PCA|our_PC|dim)_?\d+$"
 
-N_EPOCHS = 40
+N_EPOCHS = 20
 ETA0 = 1e-5
 
 
