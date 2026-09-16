@@ -134,7 +134,7 @@ if DRM == "PCA":
     y_train_chunks_file = "/path/to/your/project/our_model/PCA/Y_files/rep"+rep+"/"+pheno_name+"_Y_train_1k_chunks_no_missing.pkl"
     y_test_file = "/path/to/your/project/our_model/PCA/Y_files/rep"+rep+"/"+pheno_name+"_Y_test_1k_chunks_no_missing.pkl"
 
-    output_path = "/path/to/your/project/our_model/PCA/linear_regression/"+pheno_name+"/rep"+rep+"/incremental_linear_regression_MinMax_scaled_cov_MinMax_scaled_lr1e-5_1_epochs/"
+    output_path = "/path/to/your/project/our_model/PCA/linear_regression/"+pheno_name+"/rep"+rep+"/incremental_linear_regression_MinMax_scaled_cov_MinMax_scaled_lr1e-5_20_epochs/"
 
 if DRM == "Autoencoder":
     print("Autoencoder")
@@ -143,7 +143,7 @@ if DRM == "Autoencoder":
     X_test_chunks_file = "/path/to/your/project/our_model/Autoencoder/X_test_1k_chunks_dim_remove_no_missing_500_epochs/rep" + rep + "/" + pheno_name + "_X_test_match_to_pheno_MinMax_cov_MinMax.pkl"
     y_train_chunks_file = "/path/to/your/project/our_model/Autoencoder/Y_files/rep" + rep + "/" + pheno_name + "_Y_train_1k_chunks_no_missing.pkl"
     y_test_file = "/path/to/your/project/our_model/Autoencoder/Y_files/rep" + rep + "/" + pheno_name + "_Y_test_1k_chunks_no_missing.pkl"
-    output_path = "/path/to/your/project/NN_with_Autoencoder/" + pheno_name + "/rep" + rep + "/incremental_linear_regression_MinMax_scaled_cov_MinMax_scaled_lr0.001_40_epochs/"
+    output_path = "/path/to/your/project/NN_with_Autoencoder/" + pheno_name + "/rep" + rep + "/incremental_linear_regression_MinMax_scaled_cov_MinMax_scaled_lr0.001_20_epochs/"
 
 if not os.path.exists(output_path):
     os.makedirs(output_path)
