@@ -39,7 +39,7 @@ def print_summary(result):
     print_gpu_utilization()
 
 
-def build_model(batch,first_layer_units=0.2,second_layer_units=0.1,dropout=0.1,learning_rate=0.000004):
+def build_model(batch,first_layer_units=0.2,second_layer_units=0.1,dropout=0.1,learning_rate=1e-7):
     # Define model
     number_snps = batch.shape[1]
     model = models.Sequential(name='NN')
@@ -95,7 +95,7 @@ def fit_NN(x_train_chunks_file, y_train_chunks_file, num_epochs_from, num_epochs
                         #if (X_batch)
                         #print('batch_num')
                         #print(batch_num)
-                        history = model.fit(X_batch, y_batch, epochs=1, batch_size=64, validation_data=(X_val, y_val))
+                        history = model.fit(X_batch, y_batch, epochs=1, batch_size=50, validation_data=(X_val, y_val))
                         print_gpu_utilization()
                         batch_num = batch_num + 1
                     except EOFError:
@@ -204,7 +204,7 @@ y_test_file = "/path/to/your/project/NN_with_SNP_selection/Y_files/rep"+rep+"/"+
 
 # train NN on train set
 val_size = 1000
-num_of_epochs=80
+num_of_epochs=40
 
 X_val, y_val = create_validation_set(X_train_chunks_file=X_train_chunks_file,
                                      y_train_chunks_file=y_train_chunks_file)
