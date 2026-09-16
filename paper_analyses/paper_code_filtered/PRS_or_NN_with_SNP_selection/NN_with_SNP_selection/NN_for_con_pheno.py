@@ -39,7 +39,7 @@ def print_summary(result):
     print_gpu_utilization()
 
 
-def build_model(batch,first_layer_units=0.12,second_layer_units=0.1,dropout=0.1,learning_rate=0.000004):
+def build_model(batch,first_layer_units=0.2,second_layer_units=0.1,dropout=0.1,learning_rate=0.000004):
     # Define model
     number_snps = batch.shape[1]
     model = models.Sequential(name='NN')
