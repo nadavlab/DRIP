@@ -14,7 +14,7 @@ def LogisticRegression_incremental(x_train_chunks_file, y_train_chunks_file, X_v
 
     # initialize the SGDClassifier with logistic loss (i.e. logistic regression)
     if model==None:
-        model = SGDClassifier(loss='log_loss', learning_rate='optimal', eta0=1e-5, penalty='l2', random_state=42)
+        model = SGDClassifier(loss='log_loss', learning_rate='constant', eta0=1e-5, penalty='l2', random_state=42)
 
 
     # flag to check if model has been initialized with classes via partial_fit
@@ -32,8 +32,7 @@ def LogisticRegression_incremental(x_train_chunks_file, y_train_chunks_file, X_v
                         print('-------------------------------', str(batch_num), '-----------------------------------')
                         X_batch = pickle.load(file_handle)
                         # drop unwanted column
-                        #X_batch = X_batch.drop(['FID'], axis=1)
-                        X_batch = X_batch.iloc[:, 170:]
+                        X_batch = X_batch.drop(['FID'], axis=1)
                         X_batch.columns = X_batch.columns.astype(str)
 
                         y_batch = pickle.load(file_handle2)
@@ -95,7 +94,7 @@ def LogisticRegression_incremental(x_train_chunks_file, y_train_chunks_file, X_v
     plot_loss(train_loss, val_loss, pheno_name, output_path,epoch_from,epoch_to)
     return model
 
-'''
+
 def LogisticRegression_incremental(x_train_chunks_file, y_train_chunks_file, X_val, y_val, pheno_name, output_path, epoch_from, epoch_to, model):
     train_loss = []
     val_loss = []
@@ -172,7 +171,7 @@ def LogisticRegression_incremental(x_train_chunks_file, y_train_chunks_file, X_v
     plot_loss(train_loss, val_loss, pheno_name, output_path, epoch_from, epoch_to)
     return model
 
-'''
+
 def create_validation_set(X_train_chunks_file, y_train_chunks_file):
     with open(X_train_chunks_file, 'rb') as file_handle:
         X_val = pickle.load(file_handle)
@@ -227,23 +226,20 @@ DRM = sys.argv[3]
 # files
 if DRM == "PCA":
     # train
-    X_train_chunks_file = '/sise/nadav-group/nadavrap-group/hadasa/my_storage/impoving_PRS/data/our_model/PCA/X_train_1k_chunks_PCA_dim_remove_no_missing/rep'+rep+"/"+pheno_name+"_X_train_match_to_pheno_MinMax_cov_MinMax.pkl"
-    X_test_chunks_file = "/sise/nadav-group/nadavrap-group/hadasa/my_storage/impoving_PRS/data/our_model/PCA/X_test_1k_chunks_PCA_dim_remove_no_missing/rep"+rep+"/"+pheno_name+"_X_test_match_to_pheno_MinMax_cov_MinMax.pkl"
-    y_train_chunks_file = "/sise/nadav-group/nadavrap-group/hadasa/my_storage/impoving_PRS/data/our_model/PCA/Y_files/rep"+rep+"/"+pheno_name+"_Y_train_1k_chunks_no_missing.pkl"
-    y_test_file = "/sise/nadav-group/nadavrap-group/hadasa/my_storage/impoving_PRS/data/our_model/PCA/Y_files/rep"+rep+"/"+pheno_name+"_Y_test_1k_chunks_no_missing.pkl"
-
-    #output_path_pre = "/sise/nadav-group/nadavrap-group/hadasa/my_storage/impoving_PRS/data/our_model/PCA/logistic_regression/"+pheno_name+"/rep"+rep+"/incremental_logistic_regression_MinMax_scaled_cov_MinMax_scaled_lr_1e-5_40_epochs"
-    output_path = "/sise/nadav-group/nadavrap-group/hadasa/my_storage/impoving_PRS/data/our_model/PCA/logistic_regression/"+pheno_name+"/rep"+rep+"/eta0_0.01_l2_lr_optimal_1500"
-    #output_path = "/sise/nadav-group/nadavrap-group/hadasa/my_storage/impoving_PRS/data/our_model/PCA/logistic_regression/"+pheno_name+"/rep"+rep+"/genetic_only"
+    X_train_chunks_file = '/path/to/project/PCA/X_train_1k_chunks_PCA_dim_remove_no_missing/rep'+rep+"/"+pheno_name+"_X_train_match_to_pheno_MinMax_cov_MinMax.pkl"
+    X_test_chunks_file = "/path/to/project/PCA/X_test_1k_chunks_PCA_dim_remove_no_missing/rep"+rep+"/"+pheno_name+"_X_test_match_to_pheno_MinMax_cov_MinMax.pkl"
+    y_train_chunks_file = "/path/to/project/our_model/PCA/Y_files/rep"+rep+"/"+pheno_name+"_Y_train_1k_chunks_no_missing.pkl"
+    y_test_file = "/path/to/project/PCA/Y_files/rep"+rep+"/"+pheno_name+"_Y_test_1k_chunks_no_missing.pkl"
+    output_path_pre = "/path/to/project/PCA/logistic_regression/"+pheno_name+"/rep"+rep+"/incremental_logistic_regression_MinMax_scaled_cov_MinMax_scaled_lr_1e-5_20_epochs"
 
 if DRM == "Autoencoder":
     print("Autoencoder")
     # train
-    X_train_chunks_file = "/sise/nadav-group/nadavrap-group/hadasa/my_storage/impoving_PRS/data/our_model/Autoencoder/X_train_1k_chunks_dim_remove_no_missing_500_epochs/rep" + rep + "/" + pheno_name + "_X_train_match_to_pheno_MinMax_cov_MinMax.pkl"
-    X_test_chunks_file = "/sise/nadav-group/nadavrap-group/hadasa/my_storage/impoving_PRS/data/our_model/Autoencoder/X_test_1k_chunks_dim_remove_no_missing_500_epochs/rep" + rep + "/" + pheno_name + "_X_test_match_to_pheno_MinMax_cov_MinMax.pkl"
-    y_train_chunks_file = "/sise/nadav-group/nadavrap-group/hadasa/my_storage/impoving_PRS/data/our_model/Autoencoder/Y_files/rep" + rep + "/" + pheno_name + "_Y_train_1k_chunks_no_missing.pkl"
-    y_test_file = "/sise/nadav-group/nadavrap-group/hadasa/my_storage/impoving_PRS/data/our_model/Autoencoder/Y_files/rep" + rep + "/" + pheno_name + "_Y_test_1k_chunks_no_missing.pkl"
-    output_path = "/sise/nadav-group/nadavrap-group/hadasa/my_storage/impoving_PRS/data/NN_with_Autoencoder/" + pheno_name + "/rep" + rep + "/incremental_logistic_regression_MinMax_scaled_cov_MinMax_scaled_lr0.001_40_epochs/"
+    X_train_chunks_file = "/path/to/project/Autoencoder/X_train_1k_chunks_dim_remove_no_missing_500_epochs/rep" + rep + "/" + pheno_name + "_X_train_match_to_pheno_MinMax_cov_MinMax.pkl"
+    X_test_chunks_file = "/path/to/project/Autoencoder/X_test_1k_chunks_dim_remove_no_missing_500_epochs/rep" + rep + "/" + pheno_name + "_X_test_match_to_pheno_MinMax_cov_MinMax.pkl"
+    y_train_chunks_file = "/path/to/project/Autoencoder/Y_files/rep" + rep + "/" + pheno_name + "_Y_train_1k_chunks_no_missing.pkl"
+    y_test_file = "/path/to/project/Autoencoder/Y_files/rep" + rep + "/" + pheno_name + "_Y_test_1k_chunks_no_missing.pkl"
+    output_path = "/path/to/project/Autoencoder/logistic_regression" + pheno_name + "/rep" + rep + "/incremental_logistic_regression_MinMax_scaled_cov_MinMax_scaled_lr_1e-5_20_epochs/"
 
 if not os.path.exists(output_path):
     os.makedirs(output_path)
@@ -258,7 +254,7 @@ X_val, y_val = create_validation_set(X_train_chunks_file=X_train_chunks_file,
                                      y_train_chunks_file=y_train_chunks_file)
 
 #################################### fit model ###########################################
-'''
+
 LogReg = LogisticRegression_incremental(x_train_chunks_file=X_train_chunks_file,
                                           y_train_chunks_file=y_train_chunks_file,
                                           X_val=X_val,
@@ -279,12 +275,12 @@ with open(os.path.join(output_path, "LogisticRegression_model_genetic_only.pkl")
 print('Time fitting:')
 time_in_minutes = float(time.time() - start_time)/60.0
 print('--- %s minutes---' % time_in_minutes)
-'''
+
 
 ########################################## predict ###########################################
 #for prediction only
-with open(os.path.join(output_path, "LogisticRegression_model_genetic_only.pkl"), 'rb') as f:
-    LogReg = pickle.load(f)
+#with open(os.path.join(output_path, "LogisticRegression_model_genetic_only.pkl"), 'rb') as f:
+#    LogReg = pickle.load(f)
     
 
 predictions = predict_pheno(model=LogReg,
@@ -307,7 +303,7 @@ metrics.update(
      'average_precision_score': average_precision_score(y_test, predictions),'time':(time.time() - start_time)/60})
 
 # Append metrics to CSV
-metrics_file = os.path.join("/sise/nadav-group/nadavrap-group/hadasa/my_storage/impoving_PRS/data/our_model/PCA/logistic_regression/eta0_0.01_l2_lr_optimal_1500_metrics_log.csv")
+metrics_file = os.path.join("/path/to/project/"+DRM+"/logistic_regression/metrics_log.csv")
 
 metrics_df = pd.DataFrame([metrics])
 if os.path.exists(metrics_file):
